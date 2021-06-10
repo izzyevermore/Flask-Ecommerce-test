@@ -1,0 +1,26 @@
+Test Models
+- User (unit)
+- Item (unit)
+
+Test SignUp
+x Test that route can be accessed (unit)
+x test with invalid email that error occurs (unit)
+x test if password is less 6 characters(unit)
+x valid user that is a post(unit)
+x successfully add user (integration)
+
+
+Test Login
+x test response when loading page - should be valid irrespective of user (unit)
+x test that page returns with correct data (unit)
+- test for log in with valid user (correct name, correct password) (integration)
+- test for log in with non-existing user (integration)
+- test for log in with valid user, wrong password (integration)
+
+Test Logout
+- test that route is accessed if user is logged in ( integration )
+- test that route cant be accessed if user is not logged in (unit)
+- test response code when user navigates to page ( logged in ) (integration)
+- test response code when user navigates to page ( not logged in ) (unit)
+- test that current_user is none after logging out (integration)
+- test that user is redirected to login page after log out ( integration )
