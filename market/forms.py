@@ -3,7 +3,7 @@ from wtforms import StringField, PasswordField, SubmitField, HiddenField
 from wtforms.validators import Length, EqualTo, Email, DataRequired, ValidationError
 from market.models import User
 
-
+#hhg
 class RegisterForm(FlaskForm):
     def validate_username(self, username_to_check):
         user = User.query.filter_by(username=username_to_check.data).first()

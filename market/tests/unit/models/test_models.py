@@ -1,7 +1,8 @@
 from unittest import TestCase
 from market.models import User
 from market.models import Item
-from market import bcrypt
+from market import bcrypt, db
+
 
 class TestModels(TestCase):
     def test_user_model(self):
@@ -63,6 +64,24 @@ class TestModels(TestCase):
         new_item = item.__repr__()
 
         self.assertEqual(new_item, 'Item Phone')
+
+    def test_item_buy_method(self):
+        user = User(id=1, username='tester', email_address='test@gmail.com', password_hash='testing', budget=5000)
+
+        item = Item(name='Phone', price=2000, barcode='testing', description='Model', owner=1)
+
+        can_buy = item.buy(user)
+
+        db.session.commit()
+
+        self.assertIsNone(can_buy)
+
+
+
+
+
+
+
 
 
 
