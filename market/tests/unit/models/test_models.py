@@ -76,6 +76,21 @@ class TestModels(TestCase):
 
         self.assertIsNone(can_buy)
 
+    def test_item_sell_method(self):
+        user = User(id=1, username='tester', email_address='test@gmail.com', password_hash='testing', budget=5000)
+
+        item = Item(name='Phone', price=2000, barcode='testing', description='Model', owner=1)
+
+        can_sell = item.sell(user)
+
+        db.session.commit()
+
+        self.assertIsNone(can_sell)
+
+
+
+
+
 
 
 
