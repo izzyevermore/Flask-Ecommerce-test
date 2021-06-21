@@ -28,11 +28,16 @@ class TestModels(TestCase):
         self.assertEqual(user, "5,000$")
 
     def test_password(self):
+        # test password getter method
+        passw = User(username='tester', email_address='test@gmail.com', password_hash='password', budget=1100).password
+        print(passw)
+
+    def test_password(self):
         user = User(username='tester', email_address='test@gmail.com', password_hash='testing', budget=5000).password_hash
 
         self.assertEqual(user, 'testing')
 
-    def test_password2(self):
+    def test_password2_setter(self):
         password = 'testing'
         pw_hash = bcrypt.generate_password_hash(password)
 
@@ -86,6 +91,8 @@ class TestModels(TestCase):
         db.session.commit()
 
         self.assertIsNone(can_sell)
+
+
 
 
 
