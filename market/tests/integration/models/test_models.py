@@ -47,13 +47,17 @@ class TestModelsCrud(BaseTest):
     def test_user_can_sell_method(self):
         # register user so that user exists in db
         with self.app:
-            user = self.app.post('/register', data=dict(id=1, username='tester', email_address='test@gmail.com', password1='testing',
+            response = self.app.post('/register', data=dict(id=1, username='tester', email_address='test@gmail.com', password1='testing',
                                                  password2='testing', items=['Phone']),
                           follow_redirects=True)
         # save item to db
             item = Item(name='Phone', price=2000, barcode='testing', description='Model', owner=1)
             db.session.add(item)
             db.session.commit()
+
+            user = db.session.query(User).filter_by(username='tester').first()
+
+            can_sell = user.can_sell(item)
         # db forms a relationship between an item and user
-            self.assertEqual(user.status_code, 200)
-            self.assertTrue(item.owner, '1')
+            self.assertEqual(response.status_code, 200)
+            self.assertTrue(can_sell)
