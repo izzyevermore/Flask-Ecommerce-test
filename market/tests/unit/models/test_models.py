@@ -58,11 +58,6 @@ class TestModels(TestCase):
 
         self.assertTrue(user)
 
-    def test_can_sell_method(self):
-        item = User(username='tester', email_address='test@gmail.com', password_hash='testing', items=['Phone']).can_sell(
-            Item(name='Phone', price=2000, barcode='testing', description='Model')
-        )
-
     def test_item_repr_method(self):
         item = Item(name='Phone', price=2000, barcode='testing', description='Model')
 
