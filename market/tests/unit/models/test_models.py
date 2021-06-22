@@ -27,15 +27,12 @@ class TestModels(TestCase):
 
         self.assertEqual(user, "5,000$")
 
-    def test_password(self):
+    def test_password_getter(self):
         # test password getter method
-        passw = User(username='tester', email_address='test@gmail.com', password_hash='password', budget=1100).password
-        print(passw)
+        user = User(username='tester', email_address='test@gmail.com', password_hash='password', budget=1100).password
 
-    def test_password(self):
-        user = User(username='tester', email_address='test@gmail.com', password_hash='testing', budget=5000).password_hash
+        self.assertEqual(user.password_hash, 'password')
 
-        self.assertEqual(user, 'testing')
 
     def test_password2_setter(self):
         password = 'testing'
@@ -71,8 +68,6 @@ class TestModels(TestCase):
         item = Item(name='Phone', price=2000, barcode='testing', description='Model', owner=1)
 
         can_buy = item.buy(user)
-
-        db.session.commit()
 
         self.assertIsNone(can_buy)
 
