@@ -107,6 +107,30 @@ class TestModelsCrud(BaseTest):
             self.assertEqual(item.owner, 1)
 
 
+    def test_item_sell_method(self):
+        with self.app:
+            self.app.post('/register',
+                          data=dict(id=1, username='tester', email_address='test@gmail.com', password1='testing',
+                                    password2='testing'), follow_redirects=True)
+
+            item = Item(name='Phone', price=2000, barcode='testing', description='Model', owner=5)
+
+            db.session.add(item)
+            db.session.commit()
+
+            user = db.session.query(User).filter_by(username='tester').first()
+
+            user.budget = 5000
+
+            db.session.commit()
+
+            item.sell(user)
+
+            self.assertEqual(user.items, [])
+            self.assertFalse(item.owner, 1)
+
+
+
 
 
 

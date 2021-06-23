@@ -6,15 +6,19 @@ from flask_login import current_user
 class TestRoutes(BaseTest):
     def test_route_returns_home_page(self):
         with self.app:
-            self.app.get('/', follow_redirects=True)
+            response =  self.app.get('/', follow_redirects=True)
 
             self.assertIn('/', request.url)
+            self.assertEqual(response.status_code, 200)
+            self.assertIn(b'Welcome to Jim Shaped Coding Market', response.data)
 
     def test_route_returns_home_page(self):
         with self.app:
-            self.app.get('/home', follow_redirects=True)
+            response = self.app.get('/home', follow_redirects=True)
 
             self.assertIn('/home', request.url)
+            self.assertEqual(response.status_code, 200)
+            self.assertIn(b'Welcome to Jim Shaped Coding Market', response.data)
 
     def test_route_returns_market_page(self):
         with self.app:
@@ -24,6 +28,8 @@ class TestRoutes(BaseTest):
 
             self.assertTrue(current_user.is_active)
 
-            self.app.get('/market', follow_redirects=True)
+            response = self.app.get('/market', follow_redirects=True)
 
             self.assertIn('/market', request.url)
+            self.assertEqual(response.status_code, 200)
+            self.assertIn(b'Market Page', response.data)
